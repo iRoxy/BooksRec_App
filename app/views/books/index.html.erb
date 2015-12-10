@@ -1,31 +1,23 @@
-<h1>Listing all books!</h1>
-<%= link_to 'create new book', new_book_path %>
+<h1>Your Profile of Books</h1>
 
-<table>
-    <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Genre</th>
-    <th>Description</th>
-    </tr>
-    
-    <% @allBooks.each do |book| %>
-    <tr>
-     <td>
-         <%= book.title%>
-     </td>
-     <td>
-         <%= book.author%>
-     </td>
-     <td>
-         <%= book.genre%>
-     </td>
-     <td>
-         <%= book.description%>
-     </td>
-     <td><%= link_to 'edit', edit_book_path(book)%></td>
-     <td><%= link_to 'show', book_path(book)%></td>
-     <td><%= link_to 'delete', book_path(book), method: :delete, data: {confirm: "Are you sure?"} %></td>
-     </tr>
-    <%end%>
-</table>
+<% @allBooks.each do |book| %>
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="well well-lg">
+                <div class="book-title">
+                    <%= link_to book.title, book_path(book)%>
+                    </div>
+                    <div class="book-body">
+                        <h6>Author: <%= book.author%></h6>
+                        <h6>Genre: <%= book.genre%></h6>
+                        <%= truncate(book.description, length:100)%>
+                    </div>
+                    <div class="book-actions">
+                        <%= link_to "Edit Book", edit_book_path(book), class: "btn btn-xs btn-primary" %>
+                        <%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: "Are you sure?"}, 
+                                            class: "btn btn-xs btn-danger"%>
+                </div>
+            </div>
+        </div>
+    </div>
+<%end%>

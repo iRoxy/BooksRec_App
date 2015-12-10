@@ -1,0 +1,32 @@
+<% if @book.errors.any? %>
+<ul>
+    <%= @book.errors.full_messages.each do |msg| %>
+        <li><%= msg%></li>
+        <%end%>
+    </ul>
+    <%end%>
+
+
+<%=form_for @book do |b| %>
+    <p>
+        <%= b.label :title %><br/>
+        <%= b.text_field :title %>
+    </p>
+    <p>
+        <%= b.label :author %><br/>
+        <%= b.text_field :author %>
+    </p>
+    <p>
+        <%= b.label :genre %><br/>
+        <%= b.text_field :genre %>
+    </p>
+    <p>
+        <%= b.label :description %><br/>
+        <%= b.text_area :description %>
+    </p>
+    <p>
+        <%= b.submit %>
+    </p>
+<% end %>
+
+<%= link_to 'Back', books_path %>

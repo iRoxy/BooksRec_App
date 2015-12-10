@@ -1,0 +1,31 @@
+<h1>Listing all books!</h1>
+<%= link_to 'create new book', new_book_path %>
+
+<table>
+    <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Genre</th>
+    <th>Description</th>
+    </tr>
+    
+    <% @allBooks.each do |book| %>
+    <tr>
+     <td>
+         <%= book.title%>
+     </td>
+     <td>
+         <%= book.author%>
+     </td>
+     <td>
+         <%= book.genre%>
+     </td>
+     <td>
+         <%= book.description%>
+     </td>
+     <td><%= link_to 'edit', edit_book_path(book)%></td>
+     <td><%= link_to 'show', book_path(book)%></td>
+     <td><%= link_to 'delete', book_path(book), method: :delete, data: {confirm: "Are you sure?"} %></td>
+     </tr>
+    <%end%>
+</table>

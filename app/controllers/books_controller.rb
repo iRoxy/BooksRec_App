@@ -13,8 +13,8 @@ class BooksController < ApplicationController
     def create
         #render plain: params[:book].inspect
         @book = Book.new(book_params)
+        @book.user = User.find(session[:user_id]) if session[:user_id]
         if @book.save
-            # do something
             flash[:success] = "Book was successfully stored"
             redirect_to book_path(@book)
         else
@@ -42,13 +42,13 @@ class BooksController < ApplicationController
     
     def destroy
         @book = Book.find(params[:id])
-        @book.destroy(book_params)
+        @book.destroy
         flash[:danger] = "Book was successfully removed"
         redirect_to books_path
     end
     
     private
     def book_params
-        params.require(:book).permit(:title, :author, :genre, :description)
+        params.require(:book).permit(:title, :author, :genre, :description, :user)
     end
 end
